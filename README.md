@@ -33,6 +33,56 @@ Established scalable workflows applicable to financial technology security (e.g.
 Programming & Data: Python, Pandas, Scikit-learn
 Data Engineering: ETL Pipelines, SQL
 Visualization: Tableau, Matplotlib
-Cloud: Amazon Web Services (AWS)
+Cloud Platforms: Cloud expenditure monitoring APIs and optimization tools - Amazon Web Services (AWS)
 
-Cloud Platforms: Cloud expenditure monitoring APIs and optimization tools
+# Getting Started (step-by-step setup guide)
+Follow these steps to set up and run the project locally.
+
+### 1. Clone the Repository
+git clone https://github.com/your-username/cloud-expenditure-optimization.git
+cd cloud-expenditure-optimization
+
+### 2. Set Up a Virtual Environment (Optional but Recommended)
+python -m venv venv
+source venv/bin/activate   # On Mac/Linux
+venv\\Scripts\\activate    # On Windows
+
+### 3. Install Dependencies
+pip install -r requirements.txt
+
+### 4. Prepare Data
+Place your synthetic or sample test reports inside the data/ folder.
+Example file: data/sample_reports.csv
+
+### 5. Run the ETL Pipeline
+python src/etl_pipeline.py
+This will extract data from data/sample_reports.csv, transform it, and load it into a local SQLite database at results/etl_output.db.
+
+### 6. (Optional) Run Notebook
+Open Jupyter and run experiments:
+jupyter notebook notebooks/failure_prediction.ipynb
+
+### 7. View Results
+Check the results/ folder for metrics reports, charts, and database outputs.
+Visualizations (cloud cost trends, efficiency metrics) will be available in the generated files.
+
+# Repository Structure (folders & files)
+cloud-expenditure-optimization/
+│
+├── data/                # Sample/synthetic datasets (no confidential data)
+├── notebooks/           # Jupyter notebooks for ML experiments
+├── src/                 # Source code: ETL, ML models, dashboards
+│   ├── etl_pipeline.py
+│   ├── ml_model.py
+│   └── dashboard.py
+├── docs/                # Documentation and exhibits
+│   ├── Exhibit3.9_CardinalPeak_Project.pdf
+│   └── architecture_diagram.png
+├── results/             # Metrics, visualizations, and reports
+│   ├── metrics_report.md
+│   └── cost_savings_chart.png
+├── requirements.txt     # Python dependencies
+├── README.md            # Project overview (this file)
+└── LICENSE              # License
+
+
