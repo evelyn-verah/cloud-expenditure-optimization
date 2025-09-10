@@ -11,10 +11,15 @@
   - [Cloud Cost Forecasting (Time Series)](#cloud-cost-forecasting-time-series)
   - [Workload Clustering (Unsupervised)](#workload-clustering-unsupervised)
 - [Results](#results)
+- [Visualization Dashboards](#visualization-dashboards)
 - [Getting Started](#getting-started)
 - [Repository Structure](#repository-structure)
 - [Technologies](#technologies)
 - [Project Impact](#project-impact)
+- [Practical Implications](#practical-implications)
+- [License](#license)
+- [Acknowledgements](#-acknowledgements)
+
 ---
 
 ## Overview
@@ -166,7 +171,7 @@ Outputs (metrics, CSVs) will be written to `results/`.
 ```text
 cloud-expenditure-optimization/
 ├─ data/                      # (no company confidential data)
-│  ├─ sample_reports_100.csv
+│  ├─ sample_reports.csv
 │  └─ system_log_data.csv
 ├─ notebooks/                 # End-to-end ML workflow
 │  ├─ 01_etl_exploration.ipynb
@@ -189,7 +194,6 @@ cloud-expenditure-optimization/
 ├─ README.md
 └─ LICENSE
 ```
-
 ---
 
 ## Technologies
@@ -211,6 +215,17 @@ cloud-expenditure-optimization/
 - **Anomaly & Failure Detection**: Models that identified cloud failures can also detect unusual transaction patterns or predict outages in financial systems.  
 - **Secure Resource Allocation**: Clustering methods guide where to focus monitoring—whether on high-cost workloads or high-risk transaction segments.  
 - **Resilience Forecasting**: Time-series models anticipate peak demand, ensuring systems remain reliable during critical periods (e.g., payroll cycles or holiday     transfers).  
-- **Continuous Oversight**: Dashboards enable stakeholders to track performance, compliance, and emerging risks in real time.  
+- **Continuous Oversight**: Dashboards enable stakeholders to track performance, compliance, and emerging risks in real time.
+  
+## LICENSE
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements  
+- **Cardinal Peak LLC** – for providing the opportunity and context for this work  
+- **Open-source community** – especially contributors to Python libraries such as  [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/),  [scikit-learn](https://scikit-learn.org/), [statsmodels (https://www.statsmodels.org/), and [Matplotlib](https://matplotlib.org/)  
+- **Visualization inspiration** – principles from [Tableau](https://www.tableau.com/) guided dashboard design  
+- **Mentors, peers, and reviewers** – whose feedback strengthened the design and documentation  
+
+
 
 
