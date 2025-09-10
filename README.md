@@ -1,143 +1,163 @@
-# Overview
-This project focused on optimizing cloud expenditure and improving system reliability through advanced data analytics and applied machine learning. By analyzing software test reports, I built predictive models to anticipate potential system failures, significantly improving customer satisfaction.
-Additionally, I automated ETL pipelines and developed visualization dashboards, resulting in a 10% improvement in cloud budgeting efficiency.
-The approaches developed here are directly transferable to high-stakes financial applications such as mobile money systems, where proactive risk detection, automated monitoring, and secure cloud resource management are critical.
+# Cloud Expenditure Optimization – Cardinal Peak LLC
 
-# Objectives
-Predict potential system failures from software test data.
-Enhance customer trust and satisfaction through increased reliability.
-Automate data workflows (ETL) for scalable and repeatable insights.
-Build dashboards for real-time monitoring of cloud costs and performance.
-Achieve measurable cloud expenditure efficiency improvements.
+**AI-driven cloud cost optimization and reliability monitoring.** Predict failures from system logs, forecast cloud spend, and cluster workloads to target optimization—delivered with automated ETL, ML models, and dashboards. Impact: **~10% budgeting efficiency improvement**.
 
-# Methodology
-Data Analytics & Machine Learning
-Preprocessed software test logs and system reports.
-Applied supervised learning techniques to identify failure-prone patterns.
-  ## ETL Workflow Automation
-  Designed and deployed automated pipelines for ingestion, transformation, and storage of logs.
-  Ensured repeatability and reduced manual intervention in data preparation.
-  ## Machine Learning Models- Training and Evaluation
-   ### 1. Failure Prediction (Classification Models)
-  - The goal was to predict whether a system run would FAIL or SUCCEED based on system logs (error codes, response time, CPU/memory usage, cost).
-      #### Logistic Regression 
-      - A linear model that estimates the probability of failure.
-      - Strength: simple and interpretable, acts as a baseline.
-      - Limitation: struggles with complex non-linear interactions.
-      #### Random Forest
-      - An ensemble of decision trees, each trained on random subsets of data. 
-      - Strength: handles non-linear patterns and categorical features well, reduces overfitting.
-      - Limitation: less interpretable than Logistic Regression.
-      #### XGBoost
-      - A gradient-boosted tree algorithm, optimized for speed and accuracy.
-      - Strength: excellent performance on structured data, handles imbalanced classes well.
-      - Limitation: requires parameter tuning, can be computationally heavier.
-#### Outcome: Random Forest and XGBoost outperformed Logistic Regression, with XGBoost achieving the best precision and recall of 0.92 and 0.91, respectively, meaning it could both detect failures and avoid false alarms reliably.
+## Table of Contents
+- [Overview](#overview)
+- [Objectives](#objectives)
+- [Architecture](#architecture)
+- [Models & Methods](#models--methods)
+  - [Failure Prediction (Classification)](#failure-prediction-classification)
+  - [Cloud Cost Forecasting (Time Series)](#cloud-cost-forecasting-time-series)
+  - [Workload Clustering (Unsupervised)](#workload-clustering-unsupervised)
+- [Results](#results)
+- [Getting Started](#getting-started)
+- [Repository Structure](#repository-structure)
+- [Technologies](#technologies)
+- [Project Impact](#project-impact)
+- [Notes](#notes)
 
-### 2. Cloud Cost Forecasting (Time-Series Models)
-The goal was to forecast future cloud costs using historical usage data.
-#### ARIMA (AutoRegressive Integrated Moving Average)
-- A classic statistical model for time series forecasting.
-- Strength: captures trends and seasonality in cloud costs.
-- Limitation: requires stationary data and parameter tuning.
-#### Rolling Mean Baseline (Fallback)
-- Uses a moving average of recent costs to project forward.
-- Strength: very simple, useful as a baseline.
-- Limitation: cannot capture trends or sudden spikes.
-#### Outcome: ARIMA provided reliable cost forecasts with errors under 10% (MAPE), making it suitable for budget planning and resource allocation.
+---
 
-### 3. Workload Clustering (Unsupervised Learning)
-The goal was to group workloads by resource usage patterns (CPU, memory, response time, cost).
-#### K-Means Clustering
-- Groups workloads into k clusters by minimizing variance within each group.
-- Strength: reveals hidden structure in system workloads, e.g.:
-- Low-resource, low-cost jobs
-- High-resource jobs
-- Spiky, cost-intensive workloads
-- Limitation: requires specifying k and assumes spherical clusters.
-#### Outcome: A 3-cluster solution achieved a Silhouette Score of 0.62, showing clear separation between workload types. This insight helps prioritize which workloads to optimize or migrate.
-  
-# Detailed Machine Learning Model Results Discussion
-### Failure Prediction Results  
+## Overview
+This project optimizes cloud expenditure and improves system reliability using data analytics and machine learning. By analyzing software test reports and system logs, the pipeline predicts potential failures and provides forecasts of cloud costs. Automated ETL and dashboards make the solution reproducible and actionable for stakeholders. Approaches are transferable to **mobile money security** (proactive risk detection, automated monitoring, secure cloud ops).
+
+## Objectives
+- Predict potential system failures from software test data and system logs  
+- Enhance reliability and customer trust through earlier detection  
+- Automate ETL for scalable, repeatable insights  
+- Build dashboards for real-time monitoring of **cloud costs** and **system reliability**  
+- Achieve measurable spend efficiency improvements  
+
+## Architecture
+![Architecture Diagram](docs/architecture_diagram.png)
+
+**Flow:** Test Reports & Cloud Logs → ETL (clean, normalize) → Data Lake/DB → ML (classification, forecasting, clustering) → Dashboards.
+
+## Models & Methods
+
+### Failure Prediction (Classification)
+**Goal:** Predict **FAIL** vs **SUCCESS** using features like error codes, response time, CPU/memory usage, cost.
+
+- **Logistic Regression** – interpretable baseline; linear decision boundary  
+- **Random Forest** – ensemble of decision trees; robust to noise  
+- **XGBoost** – gradient-boosted trees; strong accuracy/recall on structured data
+
+### Cloud Cost Forecasting (Time Series)
+**Goal:** Forecast spend for budgeting and capacity planning.
+
+- **ARIMA(1,1,1)** – captures trends in cost data  
+- **Rolling Mean Baseline** – simple moving average for comparison
+
+### Workload Clustering (Unsupervised)
+**Goal:** Group workloads by resource/cost profile to target optimization.
+
+- **KMeans (k=3)** – clusters workloads by CPU, memory, response time, cost
+
+---
+
+## Results
+
+### 📊 Failure Prediction Results
 
 | Model               | Accuracy | Precision | Recall | F1   | ROC-AUC |
 |---------------------|----------|-----------|--------|------|---------|
 | Logistic Regression | 0.88     | 0.87      | 0.85   | 0.86 | 0.91    |
 | Random Forest       | 0.92     | 0.91      | 0.90   | 0.91 | 0.95    |
 | XGBoost             | 0.93     | 0.92      | 0.91   | 0.92 | 0.96    |
-- Random Forest and XGBoost outperform Logistic Regression, capturing non-linear patterns.
-- XGBoost shows the best balance of recall (catching failures) and precision (avoiding false alarms).
-  
-### Cloud Cost Forecasting (ARIMA)
-##### Model: ARIMA(1,1,1)
-#### Metrics:
-- MAE = 0.12 USD
-- RMSE = 0.19 USD
-- MAPE = 6.8%
-- The forecast closely follows actual costs, with small errors, making it useful for budget planning.
-#### Workload Clustering (KMeans, k=3)
-- Silhouette Score: 0.62
-- Clusters identified:
-= Cluster 0: Low resource / low cost workloads
-- Cluster 1: High CPU & Memory, moderate cost
-- Cluster 2: Spiky workloads with high cost impact
-- These clusters help identify which workloads to optimize or migrate.
 
-### Why Multiple Models?
-- Using different algorithms allows for benchmarking and ensures robustness.
-- Classification → keeps systems reliable by predicting failures.
-- Forecasting → prevents budget overruns with proactive cost prediction.
-- Clustering → improves resource management by identifying costly patterns.
-  
-# Visualization Dashboards
-Built interactive dashboards for stakeholders to monitor cloud usage and costs.
-Provided actionable insights into budget allocation and optimization.
+### 📈 Forecasting (ARIMA)
 
+| Model        | MAE (USD) | RMSE (USD) | MAPE |
+|--------------|-----------|------------|------|
+| ARIMA(1,1,1) | 0.12      | 0.19       | 6.8% |
 
-# Project Impact
-10% improvement in cloud budgeting efficiency.
-Early detection of potential failures, reducing downtime and increasing customer trust.
-Delivered production-ready AI/ML solutions, demonstrating business impact.
-Established scalable workflows applicable to financial technology security (e.g., mobile money).
+### 🔍 Clustering (KMeans, k=3)
 
-# Technologies
-Programming & Data: Python, Pandas, Scikit-learn
-Data Engineering: ETL Pipelines, SQL
-Visualization: Tableau, Matplotlib
-Cloud Platforms: Cloud expenditure monitoring APIs and optimization tools - Amazon Web Services (AWS)
+| k | Silhouette Score |
+|---|------------------|
+| 3 | 0.62             |
 
-# Getting Started (step-by-step setup guide)
-Follow these steps to set up and run the project locally.
+> Note: Plots and figures (e.g., confusion matrices, ROC curves, forecast plots) are **not included** in this repo. They can be reproduced by running the evaluation notebooks (`notebooks/06_model_evaluation.ipynb` and `07_full_evaluation.ipynb`).
 
-### 1. Clone the Repository
+---
+
+## Getting Started
+
+```bash
+# 1) Clone the repo
 git clone https://github.com/your-username/cloud-expenditure-optimization.git
 cd cloud-expenditure-optimization
 
-### 2. Set Up a Virtual Environment (Optional but Recommended)
+# 2) (Optional) Create and activate venv
 python -m venv venv
-source venv/bin/activate   # On Mac/Linux
-venv\\Scripts\\activate    # On Windows
+# Mac/Linux
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
 
-### 3. Install Dependencies
+# 3) Install dependencies
 pip install -r requirements.txt
 
-### 4. Prepare Data
-Place your synthetic or sample test reports inside the data/ folder.
-Example file: data/sample_reports.csv
+# 4) Prepare data
+# Place CSVs in data/, e.g.:
+#   data/sample_reports_100.csv
+#   data/system_log_data.csv
 
-### 5. Run the ETL Pipeline
+# 5) Run ETL
 python src/etl_pipeline.py
-This will extract data from data/sample_reports.csv, transform it, and load it into a local SQLite database at results/etl_output.db.
 
-### 6. (Optional) Run Notebook
-Open Jupyter and run experiments:
-jupyter notebook notebooks/failure_prediction.ipynb
+# 6) Explore notebooks
+jupyter notebook notebooks/01_etl_exploration.ipynb
+```
 
-### 7. View Results
-Check the results/ folder for metrics reports, charts, and database outputs.
-Visualizations (cloud cost trends, efficiency metrics) will be available in the generated files.
+Outputs (metrics, CSVs) will be written to `results/`.
 
-# Repository Structure (folders & files)
+---
 
+## Repository Structure
+```text
+cloud-expenditure-optimization/
+├─ data/                      # Sample/synthetic datasets (no confidential data)
+│  ├─ sample_reports_100.csv
+│  └─ system_log_data.csv
+├─ notebooks/                 # End-to-end ML workflow
+│  ├─ 01_etl_exploration.ipynb
+│  ├─ 02_failure_prediction.ipynb
+│  ├─ 03_cost_forecasting.ipynb
+│  ├─ 04_workload_clustering.ipynb
+│  ├─ 05_dashboard_prep.ipynb
+│  ├─ 06_model_evaluation.ipynb
+│  └─ 07_full_evaluation.ipynb
+├─ src/                       # Scripts (ETL/ML/dashboard)
+│  ├─ etl_pipeline.py
+│  ├─ ml_model.py
+│  └─ dashboard.py
+├─ docs/
+│  └─ architecture_diagram.png
+├─ results/                   # Model metrics (tables only)
+│  ├─ model_performance_summary.csv
+│  ├─ forecasting_metrics.csv
+│  └─ clustering_metrics.csv
+├─ requirements.txt
+├─ README.md
+└─ LICENSE
+```
 
+---
 
+## Technologies
+- **Python**: Pandas, NumPy, scikit-learn  
+- **Time Series**: statsmodels (ARIMA)  
+- **Visualization**: Matplotlib  
+- **Data Eng**: SQL, ETL workflows  
+- **Cloud**: AWS usage & cost analytics concepts
+
+## Project Impact
+- **~10% improvement** in cloud budgeting efficiency  
+- **Earlier failure detection**, reducing downtime and improving trust  
+- Demonstrates how practical ML can be applied in production
+
+## Notes
+- All datasets are **synthetic or anonymized** for demonstration.  
+- Replace sample CSVs with your own secure data to reproduce results.
