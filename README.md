@@ -1,4 +1,4 @@
-# Cloud Expenditure Optimization – Cardinal Peak LLC
+# Cloud Expenditure Optimization
 
 **AI-driven cloud cost optimization and reliability monitoring.** Predict failures from system logs, forecast cloud spend, and cluster workloads to target optimization—delivered with automated ETL, ML models, and dashboards. Impact: **~10% budgeting efficiency improvement**.
 
